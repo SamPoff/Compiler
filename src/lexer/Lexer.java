@@ -16,7 +16,7 @@ public class Lexer {
     char peek = ' ';
     Hashtable<String, Word> words = new Hashtable<String, Word>();
     
-    String filename = "/Users/sp31485/git/Compiler/src/in3.c";
+    String filename = "<file-path-to-test-file>";
     InputStream in;
     
     public final void getFile() throws IOException {
