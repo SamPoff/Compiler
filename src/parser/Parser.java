@@ -27,6 +27,7 @@ public class Parser {
 
     void match(int t) throws IOException{
         if(look.tag == t){
+        	System.out.println( "Look = " + look + " look.tag = " + look.tag + " t = " + t );
             move();
         }else{
             error("syntax error");

@@ -2,7 +2,11 @@ package lexer;
 
 import symbols.*;
 
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Hashtable;
 
 
@@ -11,12 +15,21 @@ public class Lexer {
     public static int line = 1;
     char peek = ' ';
     Hashtable<String, Word> words = new Hashtable<String, Word>();
-
+    
+    String filename = "/Users/sp31485/git/Compiler/src/in0.c";
+    InputStream in;
+    
+    public final void getFile() throws IOException {
+        final File initialFile = new File(filename);
+        in = new DataInputStream(new FileInputStream(initialFile));
+    }
+    
     void reserve(Word w){
         words.put(w.lexeme,w);
     }
 
-    public Lexer(){
+    public Lexer() throws IOException{
+    	getFile();
         reserve(new Word("if",Tag.IF));
         reserve(new Word("else",Tag.ELSE));
         reserve(new Word("while",Tag.WHILE));
@@ -31,7 +44,7 @@ public class Lexer {
     }
 
     void readch() throws IOException{
-        peek = (char) System.in.read();
+        peek = (char) in.read();
     }
 
     boolean readch(char c) throws IOException{
